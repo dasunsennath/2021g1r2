@@ -1,7 +1,4 @@
-// module.exports = {
-//     'DB_URL': process.env.DB_URL,
-//     'Secret': process.env.Secret
-// }
+
 
 const {createPool} = require('mysql');
 require('dotenv').config()

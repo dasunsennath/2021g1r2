@@ -2,103 +2,98 @@
 const pool = require('../Configure/config');
 
 
-  module.exports.findAll=(callback)=>
+
+  module.exports.findAll= (callBack)=>
    {
-     pool.query('SELECT * FROM User order by Score DESC',(error, results, fields)=>
+     pool.query('SELECT * FROM `User` order by Score DESC',(err,result,fields)=>
      {   
-      pool.end((err)=>{if(err) throw err});
-         if(error)
+      
+         if(err)
          {
-           return callback(error);
+           return callBack(err);
          }
          else
          {
-           return (null,results);
+           
+           return callBack(null,result);
          }
       
-     })
+     });
    }
 
-   module.exports.insertOne = (user)=>
+   module.exports.insertOne = (user,callback)=>
    {
-     pool.query('insert into User(Fname,Lname,Image,Email,Password) values(?,?,?,?,?)',[user.fname,user.lname,user.image,user.email,user.password],(err,result,fields)=>
+     pool.query('insert into User(Fname,Lname,Image,ImageType,ImageName,Email,Password) values(?,?,?,?,?,?,?)',[user.fname,user.lname,user.image,user.type,user.name,user.email,user.password],(err,result,fields)=>
      {
-      pool.end((err)=>{if(err) throw err});
        if(err)
        {
          return callback(err);
        }
        else
        {
-         return (null,result);
+         return callback(null,result);
        }
     
-     })
+     });
    }
 
-   module.exports.findOne = (user)=>
+   module.exports.findOneByID = (user,callback)=>
    {
      pool.query('Select * from User where ID =?',[user.id],(err,result,fields)=>
      {
-      pool.end((err)=>{if(err) throw err});
       if(err)
       {
         return callback(err);
       }
       else
       {
-        return (null,result);
+        return callback(null,result);
       }
    
      })
    }
 
-   module.exports.findOneAndUpdade=(user)=>
+   module.exports.findOneAndUpdade=(user,callback)=>
    {
-     pool.query('Update User set Fname=?,Lname = ?,Image = ?,Email = ?,Password = ?',[user.fname,user.lname,user.image,user.email,user.password],(err,result,fields)=>
+     pool.query('Update User set Fname=?,Lname = ?,Image = ?,Email = ?,Password = ? where ID = ?',[user.fname,user.lname,user.image,user.email,user.password,user.id],(err,result,fields)=>
      {
-        pool.end((err)=>{if(err) throw err});
         if(err)
         {
           return callback(err);
         }
         else
         {
-          return (null,result);
+          return callback(null,result);
         }
      
      });
    }
-   module.exports.updateScore=(user)=>
+   module.exports.updateScore=(user,callback)=>
    {
-    pool.query('Update User set Score=',[user.score],(err,result,fields)=>
+    pool.query('Update User set Score=? where ID =?',[user.score,user.id],(err,result,fields)=>
     {
-       pool.end((err)=>{if(err) throw err});
        if(err)
          {
            return callback(error);
          }
          else
          {
-           return (null,result);
+           return callback(null,result);
          }
-      
-      //  return (err,result)
     });
    }
 
-   module.exports.userSingIn = (user)=>
+   module.exports.userSingIn = (user,callback)=>
   {
      pool.query('select * where Email =?',[user.email],(err,result,fields)=>
      {
-       pool.end((err)=>{if(err) throw err});
        if(err)
        {
          return callback(err);
        }
        else
        {
-         return (null,result);
+         return callback(null,result);
        }
     
      });

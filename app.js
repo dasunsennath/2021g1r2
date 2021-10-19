@@ -4,15 +4,15 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 
-var connection =require('./Models/Users.Model')
+// var connection =require('./Models/Users.Model')
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 
 var app = express();
 
-connection.findAll();
-connection.findOne({id:1})
+// connection.findAll();
+// connection.findOne({id:1})
 // connection.insert({fname:"dasun",lname:"sennath",image:null,email:"dasun@gamil.com",password:'12345'})
 
 // view engine setup
