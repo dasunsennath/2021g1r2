@@ -7,10 +7,12 @@ const ExtractJwt = Passpost_jwt.ExtractJwt;
 const UserModel = require('../Models/Users.Model');
 require('dotenv').config();
 const bcryptjs = require('bcryptjs');
+const { use } = require('passport');
 
 
 module.exports.getToken= (user)=>
 {
+    console.log("token user -",user);
     return jwt.sign(user,process.env.Secret);
 }
 
@@ -19,16 +21,18 @@ opts.jwtFromRequest = ExtractJwt.fromAuthHeaderAsBearerToken();
 opts.secretOrKey = process.env.Secret;
 
 module.exports.jwt =Passport.use(new JWTStratergy(opts,(payload,done)=>
-{ 
-    UserModel.findOneByID({id:payload.id},(err,result)=>
+{   
+    console.log('payload',payload);
+    UserModel.findOneByID({ID:payload.id},(err,user)=>
     {
         if(err)
         {
            return done(err,false);
         }
-        if(result)
-        {
-           return done(null,result);
+        else if(user)
+        { 
+           
+           return done(null,user[0]);
         }
         else
         {
@@ -45,11 +49,21 @@ module.exports.authenticate = (req,res,next)=>
    UserModel.userSingIn(req.body,(err,user)=>
    {
        if(err)
-       {
+       { 
+          err.status = 403;
           return next(err);
        }
-       if(bcryptjs.compareSync(req.body.password,user.Password))
+       if(user.length==0)
        {
+          var err =new Error("There is no User with given Email Address");
+          err.status = 403;
+          return next(err);
+       }
+       else{
+        var match = bcryptjs.compareSync(req.body.password,user[0].Password)
+       if(match)
+       {
+         req.user = user[0];
          return next();
        }
        else
@@ -57,6 +71,20 @@ module.exports.authenticate = (req,res,next)=>
            var Err = new Error("Password is Not Match");
            return next(Err);
        }
-
+    }
    });
+}
+
+module.exports.VerifyAdmin = (req,res,next)=>
+{
+    if(req.user.Admin===1)
+    {
+        return next();
+    }
+    else
+    {
+        res.statusCode = 401;
+        res.end("Unauthorized")
+
+    }
 }

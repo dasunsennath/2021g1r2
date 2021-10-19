@@ -1,8 +1,6 @@
 
 const pool = require('../Configure/config');
 
-
-
   module.exports.findAll= (callBack)=>
    {
      pool.query('SELECT * FROM `User` order by Score DESC',(err,result,fields)=>
@@ -39,7 +37,7 @@ const pool = require('../Configure/config');
 
    module.exports.findOneByID = (user,callback)=>
    {
-     pool.query('Select * from User where ID =?',[user.id],(err,result,fields)=>
+     pool.query('Select * from User where ID =?',[user.ID],(err,result,fields)=>
      {
       if(err)
       {
@@ -55,7 +53,7 @@ const pool = require('../Configure/config');
 
    module.exports.findOneAndUpdade=(user,callback)=>
    {
-     pool.query('Update User set Fname=?,Lname = ?,Image = ?,ImageName=?,Email = ?,Password = ? where ID = ?',[user.fname,user.lname,user.image,user.name,user.email,user.password,user.id],(err,result,fields)=>
+     pool.query('Update User set Fname=?,Lname = ?,Image = ?,ImageName=?,Email = ?,Password = ? where ID = ?',[user.body.fname,user.body.lname,user.body.image,user.body.name,user.body.email,user.body.password,user.user.ID],(err,result,fields)=>
      {
         if(err)
         {
@@ -63,6 +61,17 @@ const pool = require('../Configure/config');
         }
         else
         {
+          // this.findOneByID(user.user,(err,result)=>
+          // {
+          //   if(err)
+          //   {
+          //     return callback(err);
+          //   }
+          //   else
+          //   {
+          //     return callback(null,result);
+          //   }
+          // })
           return callback(null,result);
         }
      
@@ -85,7 +94,7 @@ const pool = require('../Configure/config');
 
    module.exports.userSingIn = (user,callback)=>
   {
-     pool.query('select * where Email =?',[user.email],(err,result,fields)=>
+     pool.query('select * from User where Email =?',[user.email],(err,result,fields)=>
      {
        if(err)
        {
@@ -97,6 +106,21 @@ const pool = require('../Configure/config');
        }
     
      });
+  }
+
+  module.exports.DeleteOne =(user,callBack)=>
+  {
+    pool.query('delete from User where ID =?',[user.ID],(err,result)=>
+    {
+      if(err)
+      {
+        return callBack(err);
+      }
+      else
+      {
+        return callBack(null,result);
+      }
+    })
   }
 
   
