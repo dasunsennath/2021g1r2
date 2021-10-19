@@ -105,3 +105,8 @@ module.exports.GetOneUseByID = (req,res,next)=>
     });
 }
 
+
+module.exports.userSingIn=(req,res,next)=>
+{
+    
+}

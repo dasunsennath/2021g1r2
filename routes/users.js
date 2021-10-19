@@ -1,23 +1,23 @@
 var express = require('express');
-const bcrypt = require('bcryptjs');
+
 var router = express.Router();
 const UserController = require('../Controllers/User.Controller');
 const UPloadImage = require('../Middlewares/UploadImage');
+const configPassANdImage= require('../Configure/Password&ImageConfig')
 
 /* GET users listing. */
 router.get('/', function(req, res, next) {
 UserController.GetAllUser(req,res,next);
 });
 
-router.post('/',UPloadImage.single('image') ,(req,res,next)=>
+router.post('/singUP',UPloadImage.single('image') ,(req,res,next)=>
 {
-    var salt = bcrypt.genSaltSync(10);
-    req.body.password = bcrypt.hashSync(req.body.password,salt);
-    if(req.file)
-    {
-      req.body.name = req.file.filename;
-    }
- 
+    req = configPassANdImage.ConfigPasswordAndImage(req);
     UserController.AddUser(req,res,next);
+});
+
+router.post('/login',(req,res,next)=>
+{
+   UserController.userSingIn(req,res,next);
 });
 module.exports = router;

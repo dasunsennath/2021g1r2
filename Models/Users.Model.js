@@ -55,7 +55,7 @@ const pool = require('../Configure/config');
 
    module.exports.findOneAndUpdade=(user,callback)=>
    {
-     pool.query('Update User set Fname=?,Lname = ?,Image = ?,Email = ?,Password = ? where ID = ?',[user.fname,user.lname,user.image,user.email,user.password,user.id],(err,result,fields)=>
+     pool.query('Update User set Fname=?,Lname = ?,Image = ?,ImageName=?,Email = ?,Password = ? where ID = ?',[user.fname,user.lname,user.image,user.name,user.email,user.password,user.id],(err,result,fields)=>
      {
         if(err)
         {
