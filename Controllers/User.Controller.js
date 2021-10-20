@@ -1,7 +1,6 @@
 
 
 const UserModel = require('../Models/Users.Model');
-const{readFileSync} =require('fs');
 
 
 module.exports.GetAllUser = (req,res,next)=>
@@ -18,10 +17,6 @@ module.exports.GetAllUser = (req,res,next)=>
         {
            res.statusCode = 200; 
            res.setHeader('Content-Type','application/json');
-           for(var i=0; i<result.length;i++)
-           {
-              result[i].Image=readFileSync(__dirname+"/../public/images/"+result[i].ImageName);
-           }
            res.json({success:1,results:result});
         }
     });

@@ -12,6 +12,12 @@ router.route('/')
     UserController.GetOneUseByID(req,res,next);
 })
 
+.post((req,res,next)=>
+{
+    res.statusCode = 403;
+    res.end(`System Not allow to have POST methon on Profile${req.url} EndPoint`);
+})
+
 .put(authenticate.VerifyUser,UPloadImage.single('image'),(req,res,next)=>
 {
     req= configPassANdImage.ConfigPasswordAndImage(req);
@@ -26,7 +32,6 @@ router.route('/')
 router.route('/:ID')
 .delete(authenticate.VerifyUser,authenticate.VerifyAdmin,(req,res,next)=>
 {
-    
     UserController.DeleteUserForAdmin(req,res,next)
 })
 

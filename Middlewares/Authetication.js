@@ -3,11 +3,10 @@ const Passpost_jwt = require('passport-jwt');
 const Passport = require('passport');
 const JWTStratergy = Passpost_jwt.Strategy;
 const ExtractJwt = Passpost_jwt.ExtractJwt;
-//const UserController = require('../Controllers/User.Controller');
 const UserModel = require('../Models/Users.Model');
-require('dotenv').config();
+
 const bcryptjs = require('bcryptjs');
-const { use } = require('passport');
+
 
 
 module.exports.getToken= (user)=>
@@ -22,7 +21,6 @@ opts.secretOrKey = process.env.Secret;
 
 module.exports.jwt =Passport.use(new JWTStratergy(opts,(payload,done)=>
 {   
-    console.log('payload',payload);
     UserModel.findOneByID({ID:payload.id},(err,user)=>
     {
         if(err)

@@ -21,7 +21,7 @@ const pool = require('../Configure/config');
 
    module.exports.insertOne = (user,callback)=>
    {
-     pool.query('insert into User(Fname,Lname,Image,ImageType,ImageName,Email,Password) values(?,?,?,?,?,?,?)',[user.fname,user.lname,user.image,user.type,user.name,user.email,user.password],(err,result,fields)=>
+     pool.query('insert into User(Fname,Lname,Image,Email,Password) values(?,?,?,?,?)',[user.fname,user.lname,user.image,user.email,user.password],(err,result,fields)=>
      {
        if(err)
        {
@@ -53,7 +53,7 @@ const pool = require('../Configure/config');
 
    module.exports.findOneAndUpdade=(user,callback)=>
    {
-     pool.query('Update User set Fname=?,Lname = ?,Image = ?,ImageName=?,Email = ?,Password = ? where ID = ?',[user.body.fname,user.body.lname,user.body.image,user.body.name,user.body.email,user.body.password,user.user.ID],(err,result,fields)=>
+     pool.query('Update User set Fname=?,Lname = ?,Image = ?,Email = ?,Password = ? where ID = ?',[user.body.fname,user.body.lname,user.body.image,user.body.email,user.body.password,user.user.ID],(err,result,fields)=>
      {
         if(err)
         {
@@ -61,18 +61,17 @@ const pool = require('../Configure/config');
         }
         else
         {
-          // this.findOneByID(user.user,(err,result)=>
-          // {
-          //   if(err)
-          //   {
-          //     return callback(err);
-          //   }
-          //   else
-          //   {
-          //     return callback(null,result);
-          //   }
-          // })
-          return callback(null,result);
+          this.findOneByID(user.user,(err,result)=>
+          {
+            if(err)
+            {
+              return callback(err);
+            }
+            else
+            {
+              return callback(null,result);
+            }
+          })
         }
      
      });
