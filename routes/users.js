@@ -13,6 +13,11 @@ router.get('/',authenticate.VerifyUser,authenticate.VerifyAdmin,(req, res, next)
  UserController.GetAllUser(req,res,next);
 });
 
+router.get('/leaderBoard',authenticate.VerifyUser,(req,res,next)=>
+{
+     UserController.LeaderBoard(req,res,next);
+});
+
 router.post('/singUP',UPloadImage.single('image') ,(req,res,next)=>
 {
     req = configPassANdImage.ConfigPasswordAndImage(req);

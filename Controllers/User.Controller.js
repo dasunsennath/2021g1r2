@@ -1,5 +1,4 @@
 
-
 const UserModel = require('../Models/Users.Model');
 
 
@@ -139,4 +138,24 @@ module.exports.DeleteUserForAdmin=(req,res,next)=>
         }
     });
     
+}
+
+
+module.exports.LeaderBoard = (req,res,next)=>
+{
+    UserModel.findAllWithoutAdmin((err,result)=>
+    {
+        if(err)
+        {
+            res.statusCode = 500;
+            res.setHeader('Content-Type','application/json');
+            res.json({success:0 ,message:"Databse connection Error" ,err:err});
+        }
+        else
+        {
+           res.statusCode = 200; 
+           res.setHeader('Content-Type','application/json');
+           res.json({success:1,results:result});
+        }
+    })
 }

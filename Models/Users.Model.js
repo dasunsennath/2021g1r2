@@ -18,6 +18,24 @@ const pool = require('../Configure/config');
       
      });
    }
+    
+   module.exports.findAllWithoutAdmin = (callBack)=>
+   {
+    pool.query('SELECT * FROM `User` where Admin=0 order by Score DESC',(err,result,fields)=>
+    {   
+     
+        if(err)
+        {
+          return callBack(err);
+        }
+        else
+        {
+          
+          return callBack(null,result);
+        }
+     
+    });
+   }
 
    module.exports.insertOne = (user,callback)=>
    {
