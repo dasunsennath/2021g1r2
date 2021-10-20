@@ -11,9 +11,14 @@ cloudinary.config({
 
 const storage = new CloudinaryStorage({
     cloudinary:cloudinary,
-    allowedFormats: ['jpg', 'png','jpeg','gif'],
-    filename: function (req, file, cb) {
-      cb(null, file.originalname); 
+    params:
+    {
+      folder: 'Quizzee',
+      allowedFormats:['jpg', 'png','jpeg','gif'],
+      filename: function (req, file) {
+        return file.originalname; 
+      }
+
     }
   });
 

@@ -69,9 +69,9 @@ const pool = require('../Configure/config');
      })
    }
 
-   module.exports.findOneAndUpdade=(user,callback)=>
+   module.exports.findOneAndUpdade=(user,ID,callback)=>
    {
-     pool.query('Update User set Fname=?,Lname = ?,Image = ?,Email = ?,Password = ? where ID = ?',[user.body.fname,user.body.lname,user.body.image,user.body.email,user.body.password,user.user.ID],(err,result,fields)=>
+     pool.query('Update User set Fname=?,Lname = ?,Email = ?,Password = ? where ID = ?',[user.fname,user.lname,user.email,user.password,ID.ID],(err,result,fields)=>
      {
         if(err)
         {
@@ -79,20 +79,26 @@ const pool = require('../Configure/config');
         }
         else
         {
-          this.findOneByID(user.user,(err,result)=>
-          {
-            if(err)
-            {
-              return callback(err);
-            }
-            else
-            {
-              return callback(null,result);
-            }
-          })
+          return callback(null,result);
         }
      
      });
+   }
+
+   module.exports.UpdateImage = (Image,ID,callback)=>
+   {
+    pool.query('Update User set Image=? where ID = ?',[Image.image,ID.ID],(err,result,fields)=>
+    {
+       if(err)
+       {
+         return callback(err);
+       }
+       else
+       {
+         return callback(null,result);
+       }
+    
+    });
    }
    module.exports.updateScore=(user,callback)=>
    {

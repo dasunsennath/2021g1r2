@@ -4,6 +4,7 @@ const Passport = require('passport');
 const JWTStratergy = Passpost_jwt.Strategy;
 const ExtractJwt = Passpost_jwt.ExtractJwt;
 const UserModel = require('../Models/Users.Model');
+const UserController = require('../Controllers/User.Controller')
 
 const bcryptjs = require('bcryptjs');
 

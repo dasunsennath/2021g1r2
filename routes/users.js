@@ -8,10 +8,10 @@ var router = express.Router();
 
 
 /* GET users listing. */
-router.get('/',authenticate.VerifyUser,authenticate.VerifyAdmin,(req, res, next)=>{
+// router.get('/',authenticate.VerifyUser,authenticate.VerifyAdmin,(req, res, next)=>{
     
- UserController.GetAllUser(req,res,next);
-});
+//  UserController.GetAllUser(req,res,next);
+// });
 
 router.get('/leaderBoard',authenticate.VerifyUser,(req,res,next)=>
 {
@@ -20,7 +20,8 @@ router.get('/leaderBoard',authenticate.VerifyUser,(req,res,next)=>
 
 router.post('/singUP',UPloadImage.single('image') ,(req,res,next)=>
 {
-    req = configPassANdImage.ConfigPasswordAndImage(req);
+    req = configPassANdImage.ConfigImage(req);
+    req = configPassANdImage.ConfigPassword(req);
     UserController.AddUser(req,res,next);
 });
 

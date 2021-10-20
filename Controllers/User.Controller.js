@@ -41,9 +41,9 @@ module.exports.AddUser=(req,res,next)=>
     });
 }
 
-module.exports.GetOneUserBYEmail= (req,res,next)=>
+module.exports.GetOneUserBYEmail= (req,res,Email)=>
 {
-    UserModel.userSingIn(req.user,(err,result)=>
+    UserModel.userSingIn(Email,(err,result)=>
     {
         if(err)
         {
@@ -60,9 +60,9 @@ module.exports.GetOneUserBYEmail= (req,res,next)=>
     });
 }
 
-module.exports.UpdateUser=(req,res,next)=>
+module.exports.UpdateUser=(req,res,Updates,key)=>
 {
-    UserModel.findOneAndUpdade(req,(err,result)=>
+    UserModel.findOneAndUpdade(Updates,key,(err,result)=>
     {
         if(err)
         {
@@ -79,9 +79,28 @@ module.exports.UpdateUser=(req,res,next)=>
 
     });
 }
-module.exports.GetOneUseByID = (req,res,next)=>
+
+module.exports.UpdateImage = (req,res,Update,key)=>
 {
-    UserModel.findOneByID(req.user,(err,result)=>
+   UserModel.UpdateImage(Update,key,(err,result)=>
+   {
+    if(err)
+    {
+        res.statusCode = 404;
+        res.setHeader('Content-Type','application/json');
+        res.json({success:0,message:"Update is Unsuccessfull",err:err});
+    }
+    else
+    {
+       res.statusCode = 200; 
+       res.setHeader('Content-Type','application/json');
+       res.json({success:1 ,result:result});
+    }
+   });
+}
+module.exports.GetOneUseByID = (req,res,key)=>
+{
+    UserModel.findOneByID(key,(err,result)=>
     {
         if(err)
         {
