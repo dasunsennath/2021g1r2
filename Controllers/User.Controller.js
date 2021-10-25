@@ -119,6 +119,23 @@ module.exports.DeleteUserForAdmin = (req, res, next) => {
   });
 };
 
+module.exports.UpdateScore = (req, res, next) => {
+  UserModel.updateScore(req.user, req.body, (err, result) => {
+    if (err) {
+      res.statusCode = 500;
+      res.setHeader("Content-Type", "application/json");
+      res.json({
+        success: 0,
+        message: "Score Update Fail!",
+        err: err,
+      });
+    } else {
+      res.statusCode = 200;
+      res.setHeader("Content-Type", "application/json");
+      res.json({ success: 1, results: result });
+    }
+  });
+};
 module.exports.LeaderBoard = (req, res, next) => {
   UserModel.findAllWithoutAdmin((err, result) => {
     if (err) {
