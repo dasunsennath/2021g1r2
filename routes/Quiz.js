@@ -4,12 +4,12 @@ const authentication = require("../Middlewares/Authetication");
 
 const Router = express.Router();
 
-Router.get("/", authentication.VerifyUser, (req, res, next) => {
+Router.get("/quizes/:ID", authentication.VerifyUser, (req, res, next) => {
   QuizController.GetallQuiz(req, res, next);
 });
 
 Router.post(
-  "/",
+  "/:ID",
   authentication.VerifyUser,
   authentication.VerifyAdmin,
   (req, res, next) => {
@@ -26,7 +26,7 @@ Router.get("/:ID", authentication.VerifyUser, (req, res, next) => {
 });
 
 Router.delete(
-  "/:ID",
+  "/:ID/:quizID",
   authentication.VerifyUser,
   authentication.VerifyAdmin,
   (req, res, next) => {

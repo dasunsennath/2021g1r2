@@ -1,7 +1,7 @@
 const QuizModel = require("../Models/Quiz.Model");
 
 module.exports.GetallQuiz = (req, res, next) => {
-  QuizModel.findAll((err, result) => {
+  QuizModel.findAll(req.params, (err, result) => {
     if (err) {
       res.statusCode = 500;
       res.setHeader("Content-Type", "application/json");
@@ -19,7 +19,7 @@ module.exports.GetallQuiz = (req, res, next) => {
 };
 
 module.exports.AddQuiz = (req, res, next) => {
-  QuizModel.insertOne(req.body, (err, result) => {
+  QuizModel.insertOne(req.body, req.params, (err, result) => {
     if (err) {
       res.statusCode = 500;
       res.setHeader("Content-Type", "application/json");
