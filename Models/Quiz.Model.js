@@ -16,7 +16,7 @@ module.exports.findAll = (ID, callBack) => {
 
 module.exports.insertOne = (quiz, course, callback) => {
   pool.query(
-    "insert into quiz(question,score,correct_answer,w_answer1,w_answer2,w_answer3,course_id) values(?,?,?,?,?,?,?)",
+    "insert into quiz(question,score,correct_answer,w_answer1,w_answer2,w_answer3,quiz_no,course_id) values(?,?,?,?,?,?,?,?)",
     [
       quiz.question,
       quiz.score,
@@ -24,6 +24,7 @@ module.exports.insertOne = (quiz, course, callback) => {
       quiz.w_answer1,
       quiz.w_answer2,
       quiz.w_answer3,
+      quiz.quiz_no,
       course.ID,
     ],
     (err, result, fields) => {
@@ -52,7 +53,7 @@ module.exports.findOneByID = (quiz, callback) => {
 
 module.exports.findOneAndUpdade = (quiz, ID, callback) => {
   pool.query(
-    "Update quiz set question=?,score=?,correct_answer=?,w_answer1=?,w_answer2=?,w_answer3=?, course_id=? where ID = ?",
+    "Update quiz set question=?,score=?,correct_answer=?,w_answer1=?,w_answer2=?,w_answer3=?,quiz_no=?, course_id=? where ID = ?",
     [
       quiz.question,
       quiz.score,
@@ -60,6 +61,7 @@ module.exports.findOneAndUpdade = (quiz, ID, callback) => {
       quiz.w_answer1,
       quiz.w_answer2,
       quiz.w_answer3,
+      quiz.quiz_no,
       quiz.course_id,
       ID.ID,
     ],
