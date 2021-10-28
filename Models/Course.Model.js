@@ -51,7 +51,7 @@ module.exports.findOneAndUpdate = (course, ID, callBack) => {
   );
 };
 
-module.exports.DeleteOne = (course, callBack) => {
+module.exports.deleteOne = (course, callBack) => {
   pool.query("DELETE FROM course WHERE ID=?", [course.ID], (err, result) => {
     if (err) {
       return callBack(err);

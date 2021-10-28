@@ -89,7 +89,7 @@ module.exports.updateScore = (quiz, callback) => {
   );
 };
 
-module.exports.DeleteOne = (quiz, callBack) => {
+module.exports.deleteOne = (quiz, callBack) => {
   pool.query(
     "delete from quiz where ID =? AND course_id=?",
     [quiz.quizID, quiz.ID],

@@ -65,7 +65,7 @@ module.exports.UpdateUser = (req, res, Updates, key) => {
 };
 
 module.exports.UpdateImage = (req, res, Update, key) => {
-  UserModel.UpdateImage(Update, key, (err, result) => {
+  UserModel.updateImage(Update, key, (err, result) => {
     if (err) {
       res.statusCode = 404;
       res.setHeader("Content-Type", "application/json");
@@ -84,7 +84,7 @@ module.exports.GetOneUseByID = (req, res, key) => {
 };
 
 module.exports.DeleteUser = (req, res, next) => {
-  UserModel.DeleteOne(req.user, (err, result) => {
+  UserModel.deleteOne(req.user, (err, result) => {
     if (err) {
       res.statusCode = 404;
       res.setHeader("Content-Type", "application/json");
@@ -102,7 +102,7 @@ module.exports.DeleteUser = (req, res, next) => {
 };
 
 module.exports.DeleteUserForAdmin = (req, res, next) => {
-  UserModel.DeleteOne(req.params, (err, result) => {
+  UserModel.deleteOne(req.params, (err, result) => {
     if (err) {
       res.statusCode = 404;
       res.setHeader("Content-Type", "application/json");

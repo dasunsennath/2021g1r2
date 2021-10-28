@@ -19,7 +19,7 @@ module.exports.GetAllComplete = (req, res, next) => {
 };
 
 module.exports.InsertComplete = (req, res, next) => {
-  QuizUserModel.Insert(req.user, req.params, (err, result) => {
+  QuizUserModel.insert(req.user, req.params, (err, result) => {
     if (err) {
       res.statusCode = 500;
       res.setHeader("Content-Type", "application/json");
@@ -55,7 +55,7 @@ module.exports.GetPartialCompleteCourse = (req, res, next) => {
 };
 
 module.exports.UpdateComplete = (req, res, next) => {
-  QuizUserModel.Update(req.user, req.params, (err, result) => {
+  QuizUserModel.update(req.user, req.params, (err, result) => {
     if (err) {
       res.statusCode = 500;
       res.setHeader("Content-Type", "application/json");
@@ -73,7 +73,7 @@ module.exports.UpdateComplete = (req, res, next) => {
 };
 
 module.exports.DeleteComplete = (req, res, next) => {
-  QuizUserModel.Delete(req.user, req.params, (err, result) => {
+  QuizUserModel.delete(req.user, req.params, (err, result) => {
     if (err) {
       res.statusCode = 500;
       res.setHeader("Content-Type", "application/json");

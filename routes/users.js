@@ -1,8 +1,8 @@
 var express = require("express");
 const UserController = require("../Controllers/User.Controller");
 const UPloadImage = require("../Middlewares/UploadImage");
-const configPassANdImage = require("../Configure/Password&ImageConfig");
-const authenticate = require("../Middlewares/Authetication");
+const ConfigPassANdImage = require("../Configure/Password&ImageConfig");
+const Authenticate = require("../Middlewares/Authetication");
 
 var router = express.Router();
 
@@ -12,19 +12,19 @@ var router = express.Router();
 //  UserController.GetAllUser(req,res,next);
 // });
 
-router.get("/leaderBoard", authenticate.VerifyUser, (req, res, next) => {
+router.get("/leaderBoard", Authenticate.VerifyUser, (req, res, next) => {
   UserController.LeaderBoard(req, res, next);
 });
 
 router.post("/SignUp", UPloadImage.single("image"), (req, res, next) => {
   console.log("content ", req.body);
-  req = configPassANdImage.ConfigImage(req);
-  req = configPassANdImage.ConfigPassword(req);
+  req = ConfigPassANdImage.ConfigImage(req);
+  req = ConfigPassANdImage.ConfigPassword(req);
   UserController.AddUser(req, res, next);
 });
 
-router.post("/login", authenticate.authenticate, (req, res, next) => {
-  var token = authenticate.getToken({ id: req.user.ID });
+router.post("/login", Authenticate.authenticate, (req, res, next) => {
+  var token = Authenticate.getToken({ id: req.user.ID });
   res.statusCode = 200;
   res.setHeader("Content-Type", "application/json");
   res.json({ success: 1, token: token, status: "Login Successful!" });

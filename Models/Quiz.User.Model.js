@@ -28,7 +28,7 @@ module.exports.getCompleteCourse = (user, callBack) => {
   );
 };
 
-module.exports.Insert = (user, course, callBack) => {
+module.exports.insert = (user, course, callBack) => {
   pool.query(
     "INSERT INTO quiz_student VALUES(?,?,?)",
     [user.ID, course.ID, course.QID],
@@ -42,7 +42,7 @@ module.exports.Insert = (user, course, callBack) => {
   );
 };
 
-module.exports.Update = (user, course, callBack) => {
+module.exports.update = (user, course, callBack) => {
   pool.query(
     "UPDATE quiz_student SET quiz_id = ? WHERE course_id = ? AND student_id = ?  ",
     [course.QID, course.ID, user.ID],
@@ -56,7 +56,7 @@ module.exports.Update = (user, course, callBack) => {
   );
 };
 
-module.exports.Delete = (user, course, callBack) => {
+module.exports.delete = (user, course, callBack) => {
   pool.query(
     "DELETE FROM quiz_student WHERE student_id=? AND course_id=?",
     [user.ID, course.ID],

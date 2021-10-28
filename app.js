@@ -12,8 +12,8 @@ var usersRouter = require("./routes/users");
 var UserAdminRouter = require("./routes/users.admin");
 var CourseRouter = require("./routes/Course");
 var QuizRouter = require("./routes/Quiz");
-var Course_User = require("./routes/Course_User");
-var Quiz_User = require("./routes/Quiz.User");
+var CourseUser = require("./routes/Course_User");
+var QuizUser = require("./routes/Quiz.User");
 
 var app = express();
 
@@ -35,8 +35,8 @@ app.use("/profile", Profile);
 app.use("/admin", UserAdminRouter);
 app.use("/course", CourseRouter);
 app.use("/quiz", QuizRouter);
-app.use("/complete", Course_User);
-app.use("/done", Quiz_User);
+app.use("/complete", CourseUser);
+app.use("/done", QuizUser);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

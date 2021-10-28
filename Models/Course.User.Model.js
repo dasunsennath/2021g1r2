@@ -13,7 +13,7 @@ module.exports.getAll = (callBack) => {
   );
 };
 
-module.exports.Insert = (user, course, callBack) => {
+module.exports.insert = (user, course, callBack) => {
   pool.query(
     "INSERT INTO course_student VALUES(?,?)",
     [user.ID, course.ID],

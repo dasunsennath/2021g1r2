@@ -1,14 +1,14 @@
 var express = require("express");
 const UserController = require("../Controllers/User.Controller");
 const UPloadImage = require("../Middlewares/UploadImage");
-const configPassANdImage = require("../Configure/Password&ImageConfig");
-const authenticate = require("../Middlewares/Authetication");
+const ConfigPassANdImage = require("../Configure/Password&ImageConfig");
+const Authenticate = require("../Middlewares/Authetication");
 const Router = require("./Course_User");
 
 const router = express.Router();
 router
   .route("/")
-  .get(authenticate.VerifyUser, (req, res, next) => {
+  .get(Authenticate.VerifyUser, (req, res, next) => {
     UserController.GetOneUseByID(req, res, req.user);
   })
 
@@ -19,26 +19,26 @@ router
     );
   })
 
-  .put(authenticate.VerifyUser, (req, res, next) => {
-    req = configPassANdImage.ConfigPassword(req);
+  .put(Authenticate.VerifyUser, (req, res, next) => {
+    req = ConfigPassANdImage.ConfigPassword(req);
     UserController.UpdateUser(req, res, req.body, req.user);
   })
 
-  .delete(authenticate.VerifyUser, (req, res, next) => {
+  .delete(Authenticate.VerifyUser, (req, res, next) => {
     UserController.DeleteUser(req, res, next);
   });
 
 router.put(
   "/UpdateImage",
-  authenticate.VerifyUser,
+  Authenticate.VerifyUser,
   UPloadImage.single("image"),
   (req, res, next) => {
-    req = configPassANdImage.ConfigImage(req);
+    req = ConfigPassANdImage.ConfigImage(req);
     UserController.UpdateImage(req, res, req.body, req.user);
   }
 );
 
-router.put("/score", authenticate.VerifyUser, (req, res, next) => {
+router.put("/score", Authenticate.VerifyUser, (req, res, next) => {
   UserController.UpdateScore(req, res, next);
 });
 

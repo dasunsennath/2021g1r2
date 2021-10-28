@@ -69,7 +69,7 @@ module.exports.GetOneQuizByID = (req, res, key) => {
 };
 
 module.exports.DeleteQuiz = (req, res, next) => {
-  QuizModel.DeleteOne(req.user, (err, result) => {
+  QuizModel.deleteOne(req.user, (err, result) => {
     if (err) {
       res.statusCode = 404;
       res.setHeader("Content-Type", "application/json");
@@ -87,7 +87,7 @@ module.exports.DeleteQuiz = (req, res, next) => {
 };
 
 module.exports.DeleteQuizForAdmin = (req, res, next) => {
-  QuizModel.DeleteOne(req.params, (err, result) => {
+  QuizModel.deleteOne(req.params, (err, result) => {
     if (err) {
       res.statusCode = 404;
       res.setHeader("Content-Type", "application/json");
@@ -103,17 +103,3 @@ module.exports.DeleteQuizForAdmin = (req, res, next) => {
     }
   });
 };
-
-/* module.exports.LeaderBoard = (req, res, next) => {
-  UserModel.findAllWithoutAdmin((err, result) => {
-    if (err) {
-      res.statusCode = 500;
-      res.setHeader("Content-Type", "application/json");
-      res.json({ success: 0, message: "Databse connection Error", err: err });
-    } else {
-      res.statusCode = 200;
-      res.setHeader("Content-Type", "application/json");
-      res.json({ success: 1, results: result });
-    }
-  });
-}; */

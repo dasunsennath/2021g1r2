@@ -66,7 +66,7 @@ module.exports.GetOneCourseByID = (req, res, key) => {
 };
 
 module.exports.DeleteCourse = (req, res, next) => {
-  CourseModel.DeleteOne(req.course, (err, result) => {
+  CourseModel.deleteOne(req.course, (err, result) => {
     if (err) {
       res.statusCode = 404;
       res.setHeader("Content-Type", "application/json");
@@ -84,7 +84,7 @@ module.exports.DeleteCourse = (req, res, next) => {
 };
 
 module.exports.DeleteCourseForAdmin = (req, res, next) => {
-  CourseModel.DeleteOne(req.params, (err, result) => {
+  CourseModel.deleteOne(req.params, (err, result) => {
     if (err) {
       res.statusCode = 404;
       res.setHeader("Content-Type", "application/json");

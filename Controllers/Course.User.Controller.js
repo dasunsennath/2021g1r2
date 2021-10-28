@@ -19,7 +19,7 @@ module.exports.GetAllComplete = (req, res, next) => {
 };
 
 module.exports.InsertComplete = (req, res, next) => {
-  CourseUserModel.Insert(req.user, req.params, (err, result) => {
+  CourseUserModel.insert(req.user, req.params, (err, result) => {
     if (err) {
       res.statusCode = 500;
       res.setHeader("Content-Type", "application/json");

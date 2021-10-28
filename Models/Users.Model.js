@@ -68,7 +68,7 @@ module.exports.findOneAndUpdade = (user, ID, callback) => {
   );
 };
 
-module.exports.UpdateImage = (Image, ID, callback) => {
+module.exports.updateImage = (Image, ID, callback) => {
   pool.query(
     "Update User set Image=? where ID = ?",
     [Image.image, ID.ID],
@@ -109,7 +109,7 @@ module.exports.userSingIn = (user, callback) => {
   );
 };
 
-module.exports.DeleteOne = (user, callBack) => {
+module.exports.deleteOne = (user, callBack) => {
   pool.query("delete from User where ID =?", [user.ID], (err, result) => {
     if (err) {
       return callBack(err);
