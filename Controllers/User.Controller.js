@@ -32,14 +32,14 @@ module.exports.AddUser = (req, res, next) => {
   });
 };
 
-module.exports.GetOneUserBYEmail = (req, res, Email) => {
-  UserModel.userSingIn(Email, (err, result) => {
+module.exports.GetOneUserBYID = (req, res,User) => {
+  UserModel.findOneByID(User, (err, result) => {
     if (err) {
       res.statusCode = 404;
       res.setHeader("Content-Type", "application/json");
       res.json({
         success: 0,
-        message: " There is no user with given Email address",
+        message: " There is no user!",
         err: err,
       });
     } else {

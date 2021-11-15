@@ -2,7 +2,7 @@ const pool = require("../Configure/config");
 
 module.exports.findAll = (callBack) => {
   pool.query(
-    "SELECT * FROM `User` order by Score DESC",
+    "SELECT ID,Fname,Lname,Score,	Image,Email,Admin FROM `User` order by Score DESC",
     (err, result, fields) => {
       if (err) {
         return callBack(err);
@@ -15,7 +15,7 @@ module.exports.findAll = (callBack) => {
 
 module.exports.findAllWithoutAdmin = (callBack) => {
   pool.query(
-    "SELECT * FROM `User` where Admin=0 order by Score DESC",
+    "SELECT ID,Fname,Lname,Score,	Image,Email FROM `User` where Admin=0 order by Score DESC",
     (err, result, fields) => {
       if (err) {
         return callBack(err);
@@ -42,7 +42,20 @@ module.exports.insertOne = (user, callback) => {
 
 module.exports.findOneByID = (user, callback) => {
   pool.query(
-    "Select * from User where ID =?",
+    "Select ID,Fname,Lname,Score,	Image,Email from User where ID =?",
+    [user.ID],
+    (err, result, fields) => {
+      if (err) {
+        return callback(err);
+      } else {
+        return callback(null, result);
+      }
+    }
+  );
+};
+module.exports.findOneByIDWithAdmin = (user, callback) => {
+  pool.query(
+    "Select ID,Fname,Lname,Score,	Image,Email,Admin from User where ID =?",
     [user.ID],
     (err, result, fields) => {
       if (err) {

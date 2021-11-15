@@ -10,6 +10,7 @@ Router.get("/", Authentication.VerifyUser, (req, res, next) => {
   CourseController.GetAllCourse(req, res, next);
 });
 
+// these tasks can done by the Admin
 Router.post(
   "/",
   Authentication.VerifyUser,
@@ -21,7 +22,9 @@ Router.post(
   }
 );
 
-Router.put("/:ID", imageUpload.single("image"), (req, res, next) => {
+// these tasks can done by the Admin
+Router.put("/:ID", Authentication.VerifyUser,
+Authentication.VerifyAdmin, imageUpload.single("image"), (req, res, next) => {
   req = Config.ConfigImage(req);
   CourseController.UpdateCourse(req, res, req.body, req.params);
 });
@@ -30,6 +33,7 @@ Router.get("/:ID", Authentication.VerifyUser, (req, res, next) => {
   CourseController.GetOneCourseByID(req, res, req.params);
 });
 
+// these tasks can done by the Admin
 Router.delete(
   "/:ID",
   Authentication.VerifyUser,

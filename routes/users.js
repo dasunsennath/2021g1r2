@@ -16,7 +16,7 @@ router.get("/leaderBoard", Authenticate.VerifyUser, (req, res, next) => {
   UserController.LeaderBoard(req, res, next);
 });
 
-router.post("/SignUp", UPloadImage.single("image"), (req, res, next) => {
+router.post("/signUp", UPloadImage.single("image"), (req, res, next) => {
   console.log("content ", req.body);
   req = ConfigPassANdImage.ConfigImage(req);
   req = ConfigPassANdImage.ConfigPassword(req);

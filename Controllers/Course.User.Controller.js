@@ -1,7 +1,7 @@
 const CourseUserModel = require("../Models/Course.User.Model");
 
 module.exports.GetAllComplete = (req, res, next) => {
-  CourseUserModel.getAll((err, result) => {
+  CourseUserModel.getAll(req.user,(err, result) => {
     if (err) {
       res.statusCode = 500;
       res.setHeader("Content-Type", "application/json");

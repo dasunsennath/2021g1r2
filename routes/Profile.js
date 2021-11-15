@@ -3,7 +3,7 @@ const UserController = require("../Controllers/User.Controller");
 const UPloadImage = require("../Middlewares/UploadImage");
 const ConfigPassANdImage = require("../Configure/Password&ImageConfig");
 const Authenticate = require("../Middlewares/Authetication");
-const Router = require("./Course_User");
+
 
 const router = express.Router();
 router
@@ -29,7 +29,7 @@ router
   });
 
 router.put(
-  "/UpdateImage",
+  "/updateImage",
   Authenticate.VerifyUser,
   UPloadImage.single("image"),
   (req, res, next) => {

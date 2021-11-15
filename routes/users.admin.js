@@ -7,7 +7,7 @@ const Authenticate = require("../Middlewares/Authetication");
 const router = express.Router();
 
 router.get(
-  "/alluser",
+  "/users",
   Authenticate.VerifyUser,
   Authenticate.VerifyAdmin,
   (req, res, next) => {
@@ -16,11 +16,11 @@ router.get(
 );
 
 router.get(
-  "/oneuser",
+  "/users/:ID",
   Authenticate.VerifyUser,
   Authenticate.VerifyAdmin,
   (req, res, next) => {
-    UserController.GetOneUserBYEmail(req, res, req.body);
+    UserController.GetOneUserBYID(req, res, req.params);
   }
 );
 

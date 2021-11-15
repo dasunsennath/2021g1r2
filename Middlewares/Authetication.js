@@ -4,7 +4,7 @@ const Passport = require('passport');
 const JWTStratergy = Passpost_jwt.Strategy;
 const ExtractJwt = Passpost_jwt.ExtractJwt;
 const UserModel = require('../Models/Users.Model');
-const UserController = require('../Controllers/User.Controller')
+
 
 const bcryptjs = require('bcryptjs');
 
@@ -12,7 +12,7 @@ const bcryptjs = require('bcryptjs');
 
 module.exports.getToken= (user)=>
 {
-    console.log("token user -",user);
+ 
     return jwt.sign(user,process.env.Secret);
 }
 
@@ -22,7 +22,7 @@ opts.secretOrKey = process.env.Secret;
 
 module.exports.jwt =Passport.use(new JWTStratergy(opts,(payload,done)=>
 {   
-    UserModel.findOneByID({ID:payload.id},(err,user)=>
+    UserModel.findOneByIDWithAdmin({ID:payload.id},(err,user)=>
     {
         if(err)
         {
@@ -76,6 +76,7 @@ module.exports.authenticate = (req,res,next)=>
 
 module.exports.VerifyAdmin = (req,res,next)=>
 {
+    console.log(req.user);
     if(req.user.Admin===1)
     {
         return next();
